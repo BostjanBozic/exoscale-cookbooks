@@ -1,0 +1,34 @@
+---
+
+- hosts: all
+  name: Configure GlusterFS
+  become: yes
+  tags:
+    - configure
+  tasks:
+    - name: GlusterFS config | Ensuring GlusterFS brick and mount directory exist
+      file: "path={{item}} state=directory mode=0775"
+      with_items:
+        - "{{ gluster_brick_dir }} "
+        - "{{ gluster_mount_dir }} "
+
+    - name: GlusterFS config | Set up GlusterFS volume
+      gluster_volume:
+        state: present
+        name: "{{ gluster_volume_name }}"
+        bricks: "{{ gluster_brick_dir }}"
+        force: yes
+        rebalance: yes
+        replicas: "{{ gluster_replica_count }}"
+        cluster: "{{ groups['nodes'] | join(',') }}"
+      run_once: true
+      when: gluster_create_volume is defined and gluster_create_volume == True
+    
+    - name: GlusterFS config | Mount GlusterFS volume
+      mount:
+        name: "{{ gluster_mount_dir }}"
+        src: "{{ inventory_hostname }}:/{{ gluster_volume_name }}"
+        fstype: glusterfs
+        opts: defaults,_netdev
+        state: mounted
+      when: gluster_mount_volume is defined and gluster_mount_volume == True

@@ -1,0 +1,39 @@
+# ## First column in [all] space defines display name of Kubernetes nodes within cluster
+# ## Use node display names to assign nodes to specific roles in other parts of inventory file.
+# ## [all] defines all required nodes. Set etcd_member_name for etcd cluster (only etcd nodes)
+# ## [etcd] defines which nodes will be part of etcd cluster
+# ## [kube-master] defines which nodes will be set as Kubernetes masters
+# ## [kube-node] defines nodes that will be part of cluster (kubectl get nodes)
+
+[all]
+# <display-name-node-1> ansible_host=<node_hostname>  #etcd_member_name=etcd1
+# <display-name-node-2> ansible_host=<node_hostname>  #etcd_member_name=etcd2
+# <display-name-node-3> ansible_host=<node_hostname>  #etcd_member_name=etcd3
+# <display-name-node-4> ansible_host=<node_hostname>
+# <display-name-node-5> ansible_host=<node_hostname>
+# <display-name-node-6> ansible_host=<node_hostname>
+# <display-name-node-7> ansible_host=<node_hostname>
+# <display-name-node-8> ansible_host=<node_hostname>
+# <display-name-node-9> ansible_host=<node_hostname>
+
+[etcd]
+# <display-name-node-1>
+# <display-name-node-2>
+# <display-name-node-3>
+
+[kube-master]
+# <display-name-node-4>
+# <display-name-node-5>
+# <display-name-node-6>
+
+[kube-node]
+# <display-name-node-4>
+# <display-name-node-5>
+# <display-name-node-6>
+# <display-name-node-7>
+# <display-name-node-8>
+# <display-name-node-9>
+
+[k8s-cluster:children]
+kube-master
+kube-node

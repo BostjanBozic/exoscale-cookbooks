@@ -1,0 +1,8 @@
+#cloud-config
+
+---
+hostname: ${hostname}
+
+package_upgrade: true
+preserve_hostname: false
+fqdn: ${hostname}.${domain}

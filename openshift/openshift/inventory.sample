@@ -1,0 +1,27 @@
+[masters]
+okd-master-[0:2].exoshift.eu
+
+[etcd]
+okd-master-[0:2].exoshift.eu
+
+[nodes]
+okd-master-[0:2].exoshift.eu openshift_node_group_name="node-config-master"
+okd-infra-[0:1].exoshift.eu openshift_node_group_name="node-config-infra"
+okd-node-[0:4].exoshift.eu openshift_node_group_name="node-config-compute"
+
+[lb]
+okd-lb-0.exoshift.eu
+
+[OSEv3:children]
+masters
+nodes
+etcd
+lb
+
+[OSEv3:vars]
+ansible_user=cloud-user
+ansible_become=yes
+openshift_deployment_type=origin
+openshift_release="3.11"
+openshift_master_default_subdomain=upstream-infra-okd.exoshift.eu
+openshift_master_cluster_hostname=okd-lb-0.exoshift.eu

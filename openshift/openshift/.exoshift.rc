@@ -1,0 +1,1 @@
+export EXOSHIFT_KEYFILE=`cat ../terraform/terraform.tfvars | grep private_key_file | cut -d"\"" -f 2`

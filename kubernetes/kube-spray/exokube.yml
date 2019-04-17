@@ -1,0 +1,20 @@
+# Required CoreOS settings
+bootstrap_os: coreos
+bin_dir: /opt/bin
+ansible_ssh_user: core
+ansible_python_path: /opt/bin/python
+
+# Network overlay
+kube_network_plugin: weave
+kube_service_addresses: 172.18.0.0/18
+kube_pods_subnet: 172.19.0.0/18
+weave_password:
+weave_version: 2.5.1
+
+# DNS settings
+dns_mode: coredns
+resolvconf_mode: host_resolvconf
+nameservers: ["8.8.8.8", "8.8.4.4"]
+
+# Addons
+helm_enabled: true

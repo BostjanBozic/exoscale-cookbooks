@@ -1,0 +1,4 @@
+## [nodes] includes all nodes where GlusterFS cluster should be running
+
+[nodes]
+# <glusterfs_node_hostname>

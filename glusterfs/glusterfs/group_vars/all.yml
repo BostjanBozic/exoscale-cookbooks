@@ -1,0 +1,7 @@
+ansible_ssh_user: cloud-user
+gluster_replica_count: 2
+gluster_brick_dir: /data/glusterfs/brick1
+gluster_mount_dir: /glusterfs
+gluster_volume_name: exogluster
+gluster_create_volume: True
+gluster_mount_volume: True

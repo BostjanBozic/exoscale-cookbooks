@@ -1,0 +1,26 @@
+#cloud-config
+
+---
+hostname: ${hostname}
+
+package_upgrade: true
+preserve_hostname: false
+fqdn: ${hostname}.${domain}
+yum_repos:
+  glusterfs:
+    baseurl: http://buildlogs.centos.org/centos/7/storage/$basearch/gluster-${gluster_version}/
+    gpgcheck: false
+    enabled: true
+    name: GlusterFS
+packages:
+  - glusterfs
+  - glusterfs-api-devel
+  - glusterfs-devel
+  - glusterfs-fuse
+  - glusterfs-events
+  - glusterfs-cli
+runcmd:
+  - systemctl enable glusterd
+  - systemctl start glusterd
+  - systemctl disable firewalld
+  - systemctl stop firewalld

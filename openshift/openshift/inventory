@@ -1,0 +1,34 @@
+## [master] includes all master nodes
+## [etcd] includes all etcd nodes
+## [nodes] include all nodes that are part of Openshift cluster. openshift_node_group_name need to be specified
+## [lb] includes all loadbalancer nodes
+## [OSEv3:children] specified all nodes that are part of Openshift cluster
+## [OSEv3:vars] specifies installation parameters
+
+[masters]
+# <master_node_hostname>
+
+[etcd]
+# <etcd/master_node_hostname>
+
+[nodes]
+# <master_node_hostname> openshift_node_group_name="node-config-master"
+# <infra_node_hostname> openshift_node_group_name="node-config-infra"
+# <worker_node_hostname> openshift_node_group_name="node-config-compute"
+
+[lb]
+# <loadbalancer_node_hostname>
+
+[OSEv3:children]
+masters
+nodes
+etcd
+lb
+
+[OSEv3:vars]
+ansible_user=cloud-user
+ansible_become=yes
+openshift_deployment_type=origin
+openshift_release="3.11"
+openshift_master_default_subdomain=#<dns_record_infra_nodes>
+openshift_master_cluster_hostname=#<loadbalancer_node_hostname>
