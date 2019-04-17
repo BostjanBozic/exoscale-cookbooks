@@ -13,6 +13,3 @@ Future projects:
 
 
 In case you want specific project implemented, let me know.
-
-## Credits
-* Maintainer: [Bostjan Bozic](https://github.com/BostjanBozic)
