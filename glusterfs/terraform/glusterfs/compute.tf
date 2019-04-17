@@ -25,7 +25,7 @@ resource "exoscale_compute" "gluster_node" {
 
   provisioner "remote-exec" {
     inline = [
-      "chmod 600 /home/cloud-user/.ssh/id_rsa"
+      "chmod 600 /home/cloud-user/.ssh/id_rsa",
     ]
   }
 }

@@ -6,7 +6,7 @@ variable "installer_ip" {}
 
 variable "domain" {}
 variable "domain_ttl" {
-  default = 600
+  default =600
 }
 
 variable "zone" {
@@ -14,10 +14,10 @@ variable "zone" {
 }
 
 #
-# k8s variables
+# Elasticsearch variables
 #
 variable "master_count" {
-  default = 3
+  default = 2
 }
 variable "master_size" {
   default = "Medium"
@@ -26,25 +26,23 @@ variable "master_disk" {
   default = 100
 }
 
-
-variable "etcd_count" {
-  default = 3
+variable "data_count" {
+  default = 4
 }
-variable "etcd_size" {
-  default = "Medium"
-}
-variable "etcd_disk" {
-  default = 10
-}
-
-
-variable "node_count" {
-  default = 3
-}
-variable "node_size" {
+variable "data_size" {
   default = "Huge"
 }
-variable "node_disk" {
+variable "data_disk" {
+  default = 800
+}
+
+variable "ingest_count" {
+  default = 1
+}
+variable "ingest_size" {
+  default = "Huge"
+}
+variable "ingest_disk" {
   default = 400
 }
 
@@ -59,7 +57,7 @@ provider "cloudstack" {
   api_url = "https://api.exoscale.ch/compute"
   api_key = "${var.api_key}"
   secret_key = "${var.secret_key}"
-  timeout = 60
+  timeout =60
 }
 provider "template" {}
 
@@ -74,8 +72,8 @@ module "dns" {
   source = "dns"
   domain = "${var.domain}"
 }
-module "kubernetes" {
-  source = "kubernetes"
+module "elasticsearch" {
+  source = "elasticsearch"
   private_key_file = "${var.private_key_file}"
   installer_ip = "${var.installer_ip}"
   zone = "${var.zone}"
@@ -84,10 +82,10 @@ module "kubernetes" {
   master_count = "${var.master_count}"
   master_size = "${var.master_size}"
   master_disk = "${var.master_disk}"
-  etcd_count = "${var.etcd_count}"
-  etcd_size = "${var.etcd_size}"
-  etcd_disk = "${var.etcd_disk}"
-  node_count = "${var.node_count}"
-  node_size = "${var.node_size}"
-  node_disk = "${var.node_disk}"
+  data_count = "${var.data_count}"
+  data_size = "${var.data_size}"
+  data_disk = "${var.data_disk}"
+  ingest_count = "${var.ingest_count}"
+  ingest_size = "${var.ingest_size}"
+  ingest_disk = "${var.ingest_disk}"
 }
