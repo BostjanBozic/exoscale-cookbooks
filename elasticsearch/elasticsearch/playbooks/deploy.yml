@@ -25,22 +25,47 @@
         - directory
 
 - hosts: master
-  name: Elasticsearch master | Set up and configure Elasticsearch master nodes
+  name: Elasticsearch master | Configure Elasticsearch master nodes
   tags:
     - master
   become: yes
   roles:
     - elastic.elasticsearch
   vars:
-    es_instance_name: "{{ inventory_hostname }}"
-    es_data_dirs: "{{ es_data_dir }}"
-    es_log_dir: "{{ es_log_dir }}"
+    es_instance_name: "{{ es_cluster_name }}"
+    es_data_dirs: "{{ es_data }}"
+    es_log_dir: "{{ es_log }}"
     es_config:
       node.name: "{{ inventory_hostname }}"
       cluster.name: "{{ es_cluster_name }}"
-      discovery.zen.ping.unicast.hosts: "{{ groups['master'] | join(',') }}"
+      discovery.zen.ping.unicast.hosts: "{{ groups['master'] | map('extract', hostvars, ['ansible_host']) | join(',') }}"
       http.port: 9200
       node.data: false
       node.master: true
-      bootstrap.memory_lock: true
-      network.host: "{{ inventory_hostname }}"
+      bootstrap.memory_lock: false
+      network.host: "{{ ansible_hostname }}"
+    es_api_host: "{{ ansible_hostname }}"
+    es_enable_xpack: true
+    es_xpack_features: ["monitoring"]
+
+- hosts: data
+  name: Elasticsearch data | Configure Elasticsearch data nodes
+  tags:
+    - data
+  become: yes
+  roles:
+    - elastic.elasticsearch
+  vars:
+    es_instance_name: "{{ es_cluster_name }}"
+    es_data_dirs: "{{ es_data }}"
+    es_log_dir: "{{es_log }}"
+    es_config:
+      node.name: "{{ inventory_hostname }}"
+      cluster.name: "{{ es_cluster_name }}"
+      discovery.zen.ping.unicast.hosts: "{{ groups['master'] | map('extract', hostvars, ['ansible_host']) | join(',') }}"
+      node.data: true
+      node.master: false
+      bootstrap.memory_lock: false
+    es_api_host: "{{ ansible_hostname }}"
+    es_enable_xpack: true
+    es_xpack_features: ["monitoring"]

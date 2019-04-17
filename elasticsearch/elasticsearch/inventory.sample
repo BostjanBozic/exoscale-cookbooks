@@ -1,8 +1,12 @@
 [master]
-es-master-[0:1].exolastic.eu
+es-master-0 ansible_host=es-master-0.exolastic.eu
+es-master-1 ansible_host=es-master-1.exolastic.eu
 
 [data]
-es-data-[0:3].exolastic.eu
+es-data-0 ansible_host=es-data-0.exolastic.eu
+es-data-1 ansible_host=es-data-1.exolastic.eu
+es-data-2 ansible_host=es-data-2.exolastic.eu
+es-data-3 ansible_host=es-data-3.exolastic.eu
 
 [ingest]
-es-ingest-0.exolastic.eu
+es-ingest-0 ansible_host=es-ingest-0.exolastic.eu

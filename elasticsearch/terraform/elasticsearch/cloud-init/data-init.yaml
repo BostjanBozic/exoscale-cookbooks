@@ -6,3 +6,6 @@ hostname: ${hostname}
 package_upgrade: true
 preserve_hostname: false
 fqdn: ${hostname}.${domain}
+runcmd:
+  - systemctl disable firewalld
+  - systemctl stop firewalld
