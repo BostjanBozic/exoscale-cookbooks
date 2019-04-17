@@ -1,0 +1,12 @@
+## [master] includes all Elasticsearch master nodes
+## [data] includes all Elasticsearch data nodes
+## [ingest] includes all Elasticsearch ingest nodes
+
+[master]
+# <elasticsearch_master_hostname>
+
+[data]
+# <elasticsearch_data_hostname>
+
+[ingest]
+# <elasticsearch_ingest_hostname>

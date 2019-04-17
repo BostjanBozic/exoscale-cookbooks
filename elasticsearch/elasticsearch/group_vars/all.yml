@@ -1,0 +1,3 @@
+es_cluster_name: elasticsearch
+es_data_dir: /data/elasticsearch/data
+es_log_dir: /data/elasticsearch/logs

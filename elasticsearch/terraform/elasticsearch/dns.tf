@@ -12,7 +12,7 @@ resource "exoscale_domain_record" "exolastic_upstream_master_record" {
   domain = "${var.domain}"
   name = "upstream-master-es"
   record_type = "A"
-  content = "${element(exoscale_compute.okd_master.*.ip_address, count.index)}"
+  content = "${element(exoscale_compute.es_master.*.ip_address, count.index)}"
   ttl = "${var.domain_ttl}"
 }
 

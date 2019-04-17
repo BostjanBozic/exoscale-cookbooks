@@ -1,0 +1,46 @@
+---
+
+- hosts: all
+  name: ulimit config | Increase limit of open files for Elasticsearch
+  become: yes
+  roles:
+    - jtyr.ulimit
+  vars:
+    ulimit_config:
+      - domain : "elasticsearch"
+        type : "-"
+        item: nofile
+        value: 65536
+
+- hosts: all
+  name: Dir cleanup
+  become: yes
+  tasks:
+    - name: Dir cleanup | Recreate Elasticsearch data directories
+      file:
+        name: /data/elasticsearch
+        state: "{{ item }}"
+      with_items:
+        - absent
+        - directory
+
+- hosts: master
+  name: Elasticsearch master | Set up and configure Elasticsearch master nodes
+  tags:
+    - master
+  become: yes
+  roles:
+    - elastic.elasticsearch
+  vars:
+    es_instance_name: "{{ inventory_hostname }}"
+    es_data_dirs: "{{ es_data_dir }}"
+    es_log_dir: "{{ es_log_dir }}"
+    es_config:
+      node.name: "{{ inventory_hostname }}"
+      cluster.name: "{{ es_cluster_name }}"
+      discovery.zen.ping.unicast.hosts: "{{ groups['master'] | join(',') }}"
+      http.port: 9200
+      node.data: false
+      node.master: true
+      bootstrap.memory_lock: true
+      network.host: "{{ inventory_hostname }}"

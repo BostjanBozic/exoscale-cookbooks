@@ -1,7 +1,7 @@
 ---
 
 - hosts: all
-  name: Configure GlusterFS
+  name: GlusterFS config
   become: yes
   tags:
     - configure

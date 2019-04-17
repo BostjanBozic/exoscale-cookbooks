@@ -1,0 +1,8 @@
+[master]
+es-master-[0:1].exolastic.eu
+
+[data]
+es-data-[0:3].exolastic.eu
+
+[ingest]
+es-ingest-0.exolastic.eu

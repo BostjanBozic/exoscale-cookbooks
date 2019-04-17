@@ -12,6 +12,11 @@ resource "cloudstack_security_group_rule" "sg-elasticsearch-rules" {
   }
 
   rule {
+    protocol = "icmp"
+    user_security_group_list = ["sg-elasticsearch"]
+  }
+
+  rule {
     protocol = "tcp"
     ports = ["22", "9200"]
     cidr_list = ["${var.installer_ip}"]
