@@ -1,3 +1,4 @@
+data_node_ingest: true
 es_cluster_name: elasticsearch
 es_data: /data/elasticsearch/data
 es_log: /data/elasticsearch/logs
