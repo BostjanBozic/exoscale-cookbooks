@@ -1,4 +1,6 @@
-data_node_ingest: true
+ansible_ssh_user: cloud-user
+es_version: 6.6.0
 es_cluster_name: elasticsearch
 es_data: /data/elasticsearch/data
 es_log: /data/elasticsearch/logs
+data_node_ingest: false

@@ -12,8 +12,38 @@
         item: nofile
         value: 65536
 
-- hosts: all
-  name: Dir cleanup
+- hosts: master
+  name: Dir cleanup master
+  tags:
+    - master
+  become: yes
+  tasks:
+    - name: Dir cleanup | Recreate Elasticsearch data directories
+      file:
+        name: /data/elasticsearch
+        state: "{{ item }}"
+      with_items:
+        - absent
+        - directory
+
+- hosts: data
+  name: Dir cleanup data
+  tags:
+    - data
+  become: yes
+  tasks:
+    - name: Dir cleanup | Recreate Elasticsearch data directories
+      file:
+        name: /data/elasticsearch
+        state: "{{ item }}"
+      with_items:
+        - absent
+        - directory
+
+- hosts: ingest
+  name: Dir cleanup ingest
+  tags:
+    - ingest
   become: yes
   tasks:
     - name: Dir cleanup | Recreate Elasticsearch data directories

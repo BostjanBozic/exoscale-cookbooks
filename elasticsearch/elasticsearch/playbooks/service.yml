@@ -1,0 +1,19 @@
+---
+
+- hosts: all
+  name: Elasticsearch Service
+  become: yes
+  tags:
+    - restart
+  tasks:
+    - name: Elasticsearch Service | Restart Elasticsearch service
+      service: name=elasticsearch state=restarted
+  
+- hosts: all
+  name: Elasticsearch Service
+  become: yes
+  tags:
+    - stop
+  tasks:
+    - name: Elasticsearch Service | Stop Elasticsearch service
+      service: name=elasticsearch state=stopped

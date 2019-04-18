@@ -48,7 +48,7 @@ installer_ip = "Your host IP address with mask (x.x.x.x/x)"
 zone = "Exoscale zone for spinning up VMs (default to at-vie-1)"
 node_count = "Number of GlusterFS nodes (default to 3)"
 node_size = "Instance size for GlusterFS nodes (default to "Extra-large")"
-node_disk = "Disk size for Openshift worker nodes (default to 800)"
+node_disk = "Disk size for GlusterFS nodes (default to 800)"
 gluster_version = "Version of GlusterFS to be used (default to 6)"
 ```
 
