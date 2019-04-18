@@ -6,7 +6,7 @@
     - configure
   become: yes
   roles:
-    - jtyr.kibana
+    - kibana
   vars:
     kibana_pkg: kibana-{{ kibana_version }}
     kibana_config_elasticsearch_url: http://{{ ansible_host }}
