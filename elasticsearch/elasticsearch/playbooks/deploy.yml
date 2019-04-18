@@ -74,8 +74,8 @@
       node.ingest: false
       node.master: true
       bootstrap.memory_lock: false
-      network.host: "{{ ansible_hostname }}"
-    es_api_host: "{{ ansible_hostname }}"
+      network.host: "{{ ansible_host }}"
+    es_api_host: "{{ ansible_host }}"
     es_enable_xpack: true
     es_xpack_features: ["monitoring"]
 
@@ -99,8 +99,8 @@
       node.ingest: "{{ es_data_node_ingest }}"
       node.master: false
       bootstrap.memory_lock: false
-      network.host: "{{ ansible_hostname }}"
-    es_api_host: "{{ ansible_hostname }}"
+      network.host: "{{ ansible_host }}"
+    es_api_host: "{{ ansible_host }}"
     es_enable_xpack: true
     es_xpack_features: ["monitoring"]
 
@@ -124,7 +124,7 @@
       node.ingest: true
       node.master: false
       bootstrap.memory_lock: false
-      network.host: "{{ ansible_hostname }}"
-    es_api_host: "{{ ansible_hostname }}"
+      network.host: "{{ ansible_host }}"
+    es_api_host: "{{ ansible_host }}"
     es_enable_xpack: true
     es_xpack_features: ["monitoring"]
