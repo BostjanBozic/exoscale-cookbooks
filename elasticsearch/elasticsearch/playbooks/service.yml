@@ -8,7 +8,16 @@
   tasks:
     - name: Elasticsearch Service | Restart Elasticsearch service
       service: name=elasticsearch state=restarted
-  
+
+- hosts: all
+  name: Elasticsearch Service
+  become: yes
+  tags:
+    - start
+  tasks:
+    - name: Elasticsearch Service | Start Elasticsearch service
+      service: name=elasticsearch state=started
+
 - hosts: all
   name: Elasticsearch Service
   become: yes

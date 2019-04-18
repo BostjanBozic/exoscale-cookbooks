@@ -41,5 +41,8 @@ deploy-ingest:
 restart-service:
 	@./playbook_script.sh service restart;
 
+start-service:
+	@./playbook_script.sh service start;
+
 stop-service:
 	@./playbook_script.sh service stop;
