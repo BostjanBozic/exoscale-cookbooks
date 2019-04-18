@@ -2,7 +2,7 @@
 Scripts to provision Kubernetes cluster using [Terraform](https://www.terraform.io) and [Kubespray](https://github.com/kubernetes-sigs/kubespray) projects.
 * `kubespray` version: `v2.9.0` (Kubernetes version `v1.13.5`)
 * Underlying operating system: `Linux CoreOS 1967.5.0 64-bit`
-* project currently works only with 3 `etcd` nodes, future plan to make this dynamic
+* project by default works only with 3 `etcd` nodes, if different ammount is required, update files in `terraform/kubernetes/cloud-init` accordingly
 
 ## Workflow
 * Create `terraform.tfvars` file

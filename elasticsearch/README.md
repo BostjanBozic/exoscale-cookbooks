@@ -1,13 +1,14 @@
-# GlusterFS on Exoscale
-Scripts to provision GlusterFS cluster using [Terraform](https://www.terraform.io) and [Ansible](https://www.ansible.com/) projects.
-* `GlusterFS` version: `v6.0`
+# Elasticsearch on Exoscale
+Scripts to provision Elasticsearch cluster using [Terraform](https://www.terraform.io) and [Ansible](https://www.ansible.com/) projects.
+* `Elasticsearch` version: `v6.6.0`
+* `Kibana` version: `v6.6.0`
 * Underlying operating system: `Linux RedHat 7.6 64-bit`
 
 ## Workflow
 * Create `terraform.tfvars` file
 * Run Terraform scripts
-* Set up GlusterFS `inventory` file
-* Run GlusterFS Ansible playbook
+* Set up Elasticsearch `inventory` file
+* Run Elasticsearch Ansible playbook
 
 ## Prerequisites
 * Install Exoscale Terraform provider:
@@ -46,10 +47,15 @@ installer_ip = "Your host IP address with mask (x.x.x.x/x)"
 
 # Openshift variables
 zone = "Exoscale zone for spinning up VMs (default to at-vie-1)"
-node_count = "Number of GlusterFS nodes (default to 3)"
-node_size = "Instance size for GlusterFS nodes (default to "Extra-large")"
-node_disk = "Disk size for GlusterFS nodes (default to 800)"
-gluster_version = "Version of GlusterFS to be used (default to 6)"
+master_count = "Number of Elasticsearch master nodes (default to 2)"
+master_size = "Instance size for Elasticsearch master nodes (default to "Medium")"
+master_disk = "Disk size for Elasticsearch master nodes (default to 100)"
+data_count = "Number of Elasticsearch data nodes (default to 4)"
+data_size = "Instance size for Elasticsearch data nodes (default to "Huge")"
+data_disk = "Disk size for Elasticsearch data nodes (default to 800)"
+ingest_count = "Number of Elasticsearch ingest nodes (default to 1)"
+ingest_size = "Instance size for Elasticsearch ingest nodes (default to "Huge")"
+ingest_disk = "Disk size for Elasticsearch ingest nodes (default to 400)"
 ```
 
 In case domain already exists, remove `dns` folder and module `dns` in `main.tf`.
@@ -61,8 +67,8 @@ Initializing modules...
   Getting source "ssh"
 - module.dns
   Getting source "dns"
-- module.glusterfs
-  Getting source "glusterfs"
+- module.elasticsearch
+  Getting source "elasticsearch"
 
 Initializing provider plugins...
 - Checking for available provider plugins on https://releases.hashicorp.com...
@@ -86,24 +92,37 @@ Terraform has been successfully initialized!
 
 Next run `make create-infrastructure` and follow procedure.
 
-If all goes well, Terraform should report success message and your VMs are ready to set up GlusterFS cluster.
+If all goes well, Terraform should report success message and your VMs are ready to set up Elasticsearch cluster.
 
-## Bootstrap GlusterFS Cluster
-Script uses [gluster_volume Ansible module](https://docs.ansible.com/ansible/latest/modules/gluster_volume_module.html) for setting up GlusterFS cluster.
+## Bootstrap Elasticsearch Cluster
+Script uses [elastic.elasticsearch Ansible role](https://galaxy.ansible.com/elastic/elasticsearch) for setting up Elasticsearch cluster and [jtyr.kibana Ansible role](https://github.com/jtyr/ansible-kibana) for setting up Kibana.
 
-Move to `glusterfs` directory and update `inventory` file.
+Move to `elasticsearch` directory and update `inventory` file.
 * Update `inventory` file based on instructions within file. As a sample configuration, `inventory.sample` is provided
 
-GlusterFS settings are passed to Ansible playbooks via `group_vars/all.yml` file. In case of any parameter modifications, just adjust it. For more details and additional parameters, check [documentation](https://docs.ansible.com/ansible/latest/modules/gluster_volume_module.html).
+Elasticsearch settings are passed to Ansible playbooks via `group_vars/all.yml` file. In case of any parameter modifications, just adjust it. For more details and additional parameters, check [Elasticsearch role](https://galaxy.ansible.com/elastic/elasticsearch) and [Kibana role](https://github.com/jtyr/ansible-kibana).
 
-GlusterFS cluster can be deployed using `playbooks/deploy.yml` playbook. This can be invoked using `Make`:
-* `make configure` to configure GlusterFS cluster
+Elasticsearch cluster can be deployed using `playbooks/deploy.yml` playbook. This can be invoked using `Make`:
+* `make deploy-es` to deploy Elasticsearch cluster
+* `make deploy-master` to deploy only Elasticsearch master nodes
+* `make deploy-data` to deploy only Elasticsearch data nodes
+* `make deploy-ingest` to deploy only Elasticsearch ingest nodes
 
 Now your cluster is ready to use.
 
+For handling Kibana configuration, `playbooks/kibana.yml` playbook is used. Following `Make` targets exist:
+* `make deploy-kibana` to deploy Kibana
+
+For handling services, `playbooks/service.yml` playbook is used. Following `Make` targets exist:
+* `make restart-es-service` to restart Elasticsearch service on all nodes
+* `make start-es-service` to start Elasticsearch service on all nodes
+* `make stop-es-service` to stop Elasticsearch service on all nodes
+* `make restart-kibana-service` to restart Kibana service on Kibana nodes
+* `make start-kibana-service` to start Kibana service on Kibana nodes
+* `make stop-kibana-service` to stop Kibana service on Kibana nodes
+
 ## To Do List
 * automation of Ansible inventory file generation
-* set up remote-mount playbook
 * set up storage of `.tfstate` file on Exoscale Simple Object Storage
 
 ## Credits

@@ -16,7 +16,6 @@ variable "zone" {
 #
 # Openshift variables
 #
-
 variable "master_count" {
   default = 3
 }
@@ -57,7 +56,6 @@ variable "lb_disk" {
   default = 20
 }
 
-
 #
 # Provider settings
 #
@@ -72,7 +70,6 @@ provider "cloudstack" {
   timeout =60
 }
 provider "template" {}
-
 
 #
 # Modules
@@ -105,6 +102,3 @@ module "openshift" {
   lb_size = "${var.lb_size}"
   lb_disk = "${var.lb_disk}"
 }
-
-
-

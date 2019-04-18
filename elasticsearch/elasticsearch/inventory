@@ -1,0 +1,17 @@
+## First column in group defined node display name, ansible_host holds node hostname
+## [master] includes all Elasticsearch master nodes
+## [data] includes all Elasticsearch data nodes
+## [ingest] includes all Elasticsearch ingest nodes
+## [kibana] includes all Kibana hosts
+
+[master]
+# <display-name-master> ansible_host=<node-hostname-master>
+
+[data]
+# <display-name-data> ansible_host=<node-hostname-data>
+
+[ingest]
+# <display-name-ingest> ansible_host=<node-hostname-ingest>
+
+[kibana]
+# <display-name-kibana> ansible_host=<node-hostname-kibana>

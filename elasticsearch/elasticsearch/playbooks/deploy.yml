@@ -1,0 +1,130 @@
+---
+
+- hosts: all
+  name: ulimit config | Increase limit of open files for Elasticsearch
+  become: yes
+  roles:
+    - jtyr.ulimit
+  vars:
+    ulimit_config:
+      - domain : "elasticsearch"
+        type : "-"
+        item: nofile
+        value: 65536
+
+- hosts: master
+  name: Dir cleanup master
+  tags:
+    - master
+  become: yes
+  tasks:
+    - name: Dir cleanup | Recreate Elasticsearch data directories
+      file:
+        name: /data/elasticsearch
+        state: "{{ item }}"
+      with_items:
+        - absent
+        - directory
+
+- hosts: data
+  name: Dir cleanup data
+  tags:
+    - data
+  become: yes
+  tasks:
+    - name: Dir cleanup | Recreate Elasticsearch data directories
+      file:
+        name: /data/elasticsearch
+        state: "{{ item }}"
+      with_items:
+        - absent
+        - directory
+
+- hosts: ingest
+  name: Dir cleanup ingest
+  tags:
+    - ingest
+  become: yes
+  tasks:
+    - name: Dir cleanup | Recreate Elasticsearch data directories
+      file:
+        name: /data/elasticsearch
+        state: "{{ item }}"
+      with_items:
+        - absent
+        - directory
+
+- hosts: master
+  name: Elasticsearch master | Configure Elasticsearch master nodes
+  tags:
+    - master
+  become: yes
+  roles:
+    - elastic.elasticsearch
+  vars:
+    es_instance_name: "{{ es_cluster_name }}"
+    es_data_dirs: "{{ es_data }}"
+    es_log_dir: "{{ es_log }}"
+    es_config:
+      node.name: "{{ inventory_hostname }}"
+      cluster.name: "{{ es_cluster_name }}"
+      discovery.zen.ping.unicast.hosts: "{{ groups['master'] | map('extract', hostvars, ['ansible_host']) | join(',') }}"
+      http.port: 9200
+      node.data: false
+      node.ingest: false
+      node.master: true
+      bootstrap.memory_lock: false
+      network.host: "{{ ansible_host }}"
+    es_api_host: "{{ ansible_host }}"
+    es_enable_xpack: true
+    es_xpack_features: ["monitoring"]
+
+- hosts: data
+  name: Elasticsearch data | Configure Elasticsearch data nodes
+  tags:
+    - data
+  become: yes
+  roles:
+    - elastic.elasticsearch
+  vars:
+    es_instance_name: "{{ es_cluster_name }}"
+    es_data_dirs: "{{ es_data }}"
+    es_log_dir: "{{es_log }}"
+    es_config:
+      node.name: "{{ inventory_hostname }}"
+      cluster.name: "{{ es_cluster_name }}"
+      discovery.zen.ping.unicast.hosts: "{{ groups['master'] | map('extract', hostvars, ['ansible_host']) | join(',') }}"
+      http.port: 9200
+      node.data: true
+      node.ingest: "{{ es_data_node_ingest }}"
+      node.master: false
+      bootstrap.memory_lock: false
+      network.host: "{{ ansible_host }}"
+    es_api_host: "{{ ansible_host }}"
+    es_enable_xpack: true
+    es_xpack_features: ["monitoring"]
+
+- hosts: ingest
+  name: Elasticsearch ingest | Configure Elasticsearch ingest nodes
+  tags:
+    - ingest
+  become: yes
+  roles:
+    - elastic.elasticsearch
+  vars:
+    es_instance_name: "{{ es_cluster_name }}"
+    es_data_dirs: "{{ es_data }}"
+    es_log_dir: "{{es_log }}"
+    es_config:
+      node.name: "{{ inventory_hostname }}"
+      cluster.name: "{{ es_cluster_name }}"
+      discovery.zen.ping.unicast.hosts: "{{ groups['master'] | map('extract', hostvars, ['ansible_host']) | join(',') }}"
+      http.port: 9200
+      node.data: false
+      node.ingest: true
+      node.master: false
+      bootstrap.memory_lock: false
+      network.host: "{{ ansible_host }}"
+    es_api_host: "{{ ansible_host }}"
+    es_enable_xpack: true
+    es_xpack_features: ["monitoring"]
