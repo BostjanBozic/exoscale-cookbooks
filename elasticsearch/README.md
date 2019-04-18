@@ -1,6 +1,7 @@
 # Elasticsearch on Exoscale
 Scripts to provision Elasticsearch cluster using [Terraform](https://www.terraform.io) and [Ansible](https://www.ansible.com/) projects.
 * `Elasticsearch` version: `v6.6.0`
+* `Kibana` version: `v6.6.0`
 * Underlying operating system: `Linux RedHat 7.6 64-bit`
 
 ## Workflow
@@ -94,24 +95,31 @@ Next run `make create-infrastructure` and follow procedure.
 If all goes well, Terraform should report success message and your VMs are ready to set up Elasticsearch cluster.
 
 ## Bootstrap Elasticsearch Cluster
-Script uses [elastic.elasticsearch Ansible role](https://galaxy.ansible.com/elastic/elasticsearch) for setting up Elasticsearch cluster.
+Script uses [elastic.elasticsearch Ansible role](https://galaxy.ansible.com/elastic/elasticsearch) for setting up Elasticsearch cluster and [jtyr.kibana Ansible role](https://github.com/jtyr/ansible-kibana) for setting up Kibana.
 
 Move to `elasticsearch` directory and update `inventory` file.
 * Update `inventory` file based on instructions within file. As a sample configuration, `inventory.sample` is provided
 
-Elasticsearch settings are passed to Ansible playbooks via `group_vars/all.yml` file. In case of any parameter modifications, just adjust it. For more details and additional parameters, check [documentation](https://galaxy.ansible.com/elastic/elasticsearch).
+Elasticsearch settings are passed to Ansible playbooks via `group_vars/all.yml` file. In case of any parameter modifications, just adjust it. For more details and additional parameters, check [Elasticsearch role](https://galaxy.ansible.com/elastic/elasticsearch) and [Kibana role](https://github.com/jtyr/ansible-kibana).
 
 Elasticsearch cluster can be deployed using `playbooks/deploy.yml` playbook. This can be invoked using `Make`:
-* `make deploy-all` to configure Elasticsearch cluster
-* `make deploy-master` to configure only Elasticsearch master nodes
-* `make deploy-data` to configure only Elasticsearch data nodes
-* `make deploy-ingest` to configure only Elasticsearch ingest nodes
+* `make deploy-es` to deploy Elasticsearch cluster
+* `make deploy-master` to deploy only Elasticsearch master nodes
+* `make deploy-data` to deploy only Elasticsearch data nodes
+* `make deploy-ingest` to deploy only Elasticsearch ingest nodes
 
 Now your cluster is ready to use.
 
-For handling Elasticsearch service, `playbooks/service.yml` playbook is used. Following `Make` targets exist:
-* `make restart-service` to restart Elasticsearch service on all nodes
-* `make stop-service` to stop Elasticsearch service on all nodes
+For handling Kibana configuration, `playbooks/kibana.yml` playbook is used. Following `Make` targets exist:
+* `make deploy-kibana` to deploy Kibana
+
+For handling services, `playbooks/service.yml` playbook is used. Following `Make` targets exist:
+* `make restart-es-service` to restart Elasticsearch service on all nodes
+* `make start-es-service` to start Elasticsearch service on all nodes
+* `make stop-es-service` to stop Elasticsearch service on all nodes
+* `make restart-kibana-service` to restart Kibana service on Kibana nodes
+* `make start-kibana-service` to start Kibana service on Kibana nodes
+* `make stop-kibana-service` to stop Kibana service on Kibana nodes
 
 ## To Do List
 * automation of Ansible inventory file generation

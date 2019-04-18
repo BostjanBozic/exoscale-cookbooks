@@ -2,6 +2,7 @@
 ## [master] includes all Elasticsearch master nodes
 ## [data] includes all Elasticsearch data nodes
 ## [ingest] includes all Elasticsearch ingest nodes
+## [kibana] includes all Kibana hosts
 
 [master]
 # <display-name-master> ansible_host=<node-hostname-master>
@@ -11,3 +12,6 @@
 
 [ingest]
 # <display-name-ingest> ansible_host=<node-hostname-ingest>
+
+[kibana]
+# <display-name-kibana> ansible_host=<node-hostname-kibana>

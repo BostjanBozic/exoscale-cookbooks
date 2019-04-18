@@ -2,12 +2,12 @@
 Exoscale cookbooks for different project.
 
 Currently supported projects:
+* `Elasticsearch`
+* `GlusterFS`
 * `Kubernetes`
 * `Openshift`
-* `GlusterFS`
 
 Future projects:
-* `Elasticsearch`
 * `Kafka`
 * `Redis`
 

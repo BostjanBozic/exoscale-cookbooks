@@ -10,3 +10,6 @@ es-data-3 ansible_host=es-data-3.exolastic.eu
 
 [ingest]
 es-ingest-0 ansible_host=es-ingest-0.exolastic.eu
+
+[kibana]
+kibana-0 ansible_host=es-master-0.exolastic.eu

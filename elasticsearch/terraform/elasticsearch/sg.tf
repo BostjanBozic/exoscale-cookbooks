@@ -18,7 +18,7 @@ resource "cloudstack_security_group_rule" "sg-elasticsearch-rules" {
 
   rule {
     protocol = "tcp"
-    ports = ["22", "9200"]
+    ports = ["22", "8080", "9200"]
     cidr_list = ["${var.installer_ip}"]
   }
 }

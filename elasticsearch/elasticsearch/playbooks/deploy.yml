@@ -96,7 +96,7 @@
       discovery.zen.ping.unicast.hosts: "{{ groups['master'] | map('extract', hostvars, ['ansible_host']) | join(',') }}"
       http.port: 9200
       node.data: true
-      node.ingest: "{{ data_node_ingest }}"
+      node.ingest: "{{ es_data_node_ingest }}"
       node.master: false
       bootstrap.memory_lock: false
       network.host: "{{ ansible_hostname }}"

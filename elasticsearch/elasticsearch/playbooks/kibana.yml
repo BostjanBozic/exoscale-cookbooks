@@ -1,0 +1,14 @@
+---
+
+- hosts: kibana
+  name: Kibana | Configure Kibana
+  tags:
+    - configure
+  become: yes
+  roles:
+    - jtyr.kibana
+  vars:
+    kibana_pkg: kibana-{{ kibana_version }}
+    kibana_config_elasticsearch_url: http://{{ ansible_host }}
+    kibana_config_server_host: 0.0.0.0
+    kibana_config_server_port: "{{ kibana_port }}"

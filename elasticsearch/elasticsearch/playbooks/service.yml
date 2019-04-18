@@ -1,28 +1,55 @@
 ---
 
-- hosts: all
+- hosts: master:data:ingest
   name: Elasticsearch Service
   become: yes
   tags:
-    - restart
+    - es-restart
   tasks:
     - name: Elasticsearch Service | Restart Elasticsearch service
       service: name=elasticsearch state=restarted
 
-- hosts: all
+- hosts: master:data:ingest
   name: Elasticsearch Service
   become: yes
   tags:
-    - start
+    - es-start
   tasks:
     - name: Elasticsearch Service | Start Elasticsearch service
       service: name=elasticsearch state=started
 
-- hosts: all
+- hosts: master:data:ingest
   name: Elasticsearch Service
   become: yes
   tags:
-    - stop
+    - es-stop
   tasks:
     - name: Elasticsearch Service | Stop Elasticsearch service
       service: name=elasticsearch state=stopped
+
+- hosts: kibana
+  name: Kibana Service
+  become: yes
+  tags:
+    - kibana-restart
+  tasks:
+    - name: Kibana Service | Restart Kibana service
+      service: name=kibana state=restarted
+
+- hosts: kibana
+  name: Kibana Service
+  become: yes
+  tags:
+    - kibana-start
+  tasks:
+    - name: Kibana Service | Start Kibana service
+      service: name=kibana state=started
+
+- hosts: kibana
+  name: Kibana Service
+  become: yes
+  tags:
+    - kibana-stop
+  tasks:
+    - name: Kibana Service | Stop Kibana service
+      service: name=kibana state=stopped
