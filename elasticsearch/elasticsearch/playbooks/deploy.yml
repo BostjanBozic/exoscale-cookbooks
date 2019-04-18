@@ -4,7 +4,7 @@
   name: ulimit config | Increase limit of open files for Elasticsearch
   become: yes
   roles:
-    - ulimit
+    - jtyr.ulimit
   vars:
     ulimit_config:
       - domain : "elasticsearch"
@@ -60,7 +60,7 @@
     - master
   become: yes
   roles:
-    - elasticsearch
+    - elastic.elasticsearch
   vars:
     es_instance_name: "{{ es_cluster_name }}"
     es_data_dirs: "{{ es_data }}"
@@ -85,7 +85,7 @@
     - data
   become: yes
   roles:
-    - elasticsearch
+    - elastic.elasticsearch
   vars:
     es_instance_name: "{{ es_cluster_name }}"
     es_data_dirs: "{{ es_data }}"
@@ -110,7 +110,7 @@
     - ingest
   become: yes
   roles:
-    - elasticsearch
+    - elastic.elasticsearch
   vars:
     es_instance_name: "{{ es_cluster_name }}"
     es_data_dirs: "{{ es_data }}"

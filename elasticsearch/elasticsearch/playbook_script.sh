@@ -18,13 +18,14 @@ playbook_tag=$2
 # Set up playbook file used
 if [ "${playbook_mode}" == "deploy" ]; then
     # Fetch Ansible roles
-    ansible-galaxy install jtyr.ulimit --force -p playbooks/roles/ulimit
-    ansible-galaxy install elastic.elasticsearch,6.6.0 --force -p playbooks/roles/elasticsearch
+    ansible-galaxy install jtyr.ulimit --force -p playbooks/roles
+    ansible-galaxy install elastic.elasticsearch,6.6.0 --force -p playbooks/roles
     playbook_file="playbooks/deploy.yml"
 elif [ "${playbook_mode}" == "kibana" ]; then
     # Fetch Ansible roles
-    ansible-galaxy install jtyr.config_encoder_filters --force -p playbooks/roles/config_encoder_filters
-    ansible-galaxy install jtyr.kibana --force -p playbooks/roles/kibana
+    ansible-galaxy install jtyr.config_encoder_filters --force -p playbooks/roles
+    ansible-galaxy install jtyr.kibana --force -p playbooks/roles
+    sed -i "s/config_encoder_filters/jtyr.config_encoder_filters/g" playbooks/roles/jtyr.kibana/meta/main.yml
     playbook_file="playbooks/kibana.yml"
 elif [ "${playbook_mode}" == "service" ]; then
     playbook_file="playbooks/service.yml"
