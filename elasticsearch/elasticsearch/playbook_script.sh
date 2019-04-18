@@ -17,7 +17,7 @@ playbook_tag=$2
 
 # Set up playbook file used
 if [ "${playbook_mode}" == "deploy" ]; then
-    # Clone Ansible roles
+    # Fetch Ansible roles
     if [ -d "playbooks/roles" ]; then
         rm -rf playbooks/roles;
     fi
