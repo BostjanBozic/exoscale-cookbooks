@@ -6,10 +6,9 @@ Currently supported projects:
 * `GlusterFS`
 * `Kubernetes`
 * `Openshift`
+* `Redis`
 
 Future projects:
 * `Kafka`
-* `Redis`
-
 
 In case you want specific project implemented, let me know.

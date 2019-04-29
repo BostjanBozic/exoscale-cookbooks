@@ -29,4 +29,4 @@ fi
 ansible-galaxy install BostjanBozic.redis --force -p playbooks/roles
 
 # Run Ansible playbook
-ansible-playbook -i inventory ${playbook_file} --private-key="${EXOLASTIC_KEYFILE}"
+ansible-playbook -i inventory ${playbook_file} --private-key="${EXODIS_KEYFILE}"

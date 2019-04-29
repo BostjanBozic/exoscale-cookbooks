@@ -1,10 +1,12 @@
 ---
 
 - hosts: master
+  become: yes
   roles:
     - BostjanBozic.redis
 
 - hosts: replica
+  become: yes
   roles:
     - BostjanBozic.redis
   vars:
