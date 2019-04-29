@@ -1,0 +1,11 @@
+---
+
+- hosts: master
+  roles:
+    - BostjanBozic.redis
+
+- hosts: replica
+  roles:
+    - BostjanBozic.redis
+  vars:
+    - replicaof: "{{ master_host }} {{ redis_port }}"

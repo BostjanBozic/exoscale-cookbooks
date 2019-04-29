@@ -25,13 +25,13 @@ variable "master_size" {
 variable "master_disk" {
   default = 100
 }
-variable "slave_count" {
+variable "replica_count" {
   default = 3
 }
-variable "slave_size" {
+variable "replica_size" {
   default = "Huge"
 }
-variable "slave_disk" {
+variable "replica_disk" {
   default = 100
 }
 variable "sentinel_count" {
@@ -76,13 +76,13 @@ module "redis" {
   installer_ip = "${var.installer_ip}"
   zone = "${var.zone}"
   domain = "${var.domain}"
-  domain_tll = "${var.domain_ttl}"
+  domain_ttl = "${var.domain_ttl}"
   master_count = "${var.master_count}"
-  master_size = "${ar.master_size}"
+  master_size = "${var.master_size}"
   master_disk = "${var.master_disk}"
-  slave_count = "${var.slave_count}"
-  slave_size = "${var.slave_size}"
-  slave_disk = "${var.slave_disk}"
+  replica_count = "${var.replica_count}"
+  replica_size = "${var.replica_size}"
+  replica_disk = "${var.replica_disk}"
   sentinel_count = "${var.sentinel_count}"
   sentinel_size ="${var.sentinel_size}"
   sentinel_disk = "${var.sentinel_disk}"

@@ -1,0 +1,7 @@
+---
+
+- hosts: all
+  roles:
+    - BostjanBozic.redis
+  vars:
+    - redis_cluster_enabled: "yes"

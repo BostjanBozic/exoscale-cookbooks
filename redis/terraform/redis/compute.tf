@@ -30,17 +30,17 @@ resource "exoscale_compute" "redis_master" {
   }
 }
 
-resource "exoscale_compute" "redis_slave" {
+resource "exoscale_compute" "redis_replica" {
   depends_on = ["cloudstack_security_group.sg-redis"]
-  count = "${var.slave_count}"
+  count = "${var.replica_count}"
   template =  "Linux RedHat 7.6 64-bit"
   zone = "${var.zone}"
-  size = "${var.slave_size}"
-  disk_size = "${var.slave_disk}"
+  size = "${var.replica_size}"
+  disk_size = "${var.replica_disk}"
   key_pair = "exodis-key"
   security_groups = ["sg-redis"]
-  display_name = "redis-slave-${count.index}"
-  user_data = "${base64encode(element(data.template_file.slave.*.rendered, count.index))}"
+  display_name = "redis-replica-${count.index}"
+  user_data = "${base64encode(element(data.template_file.replica.*.rendered, count.index))}"
 
   connection {
     user = "cloud-user"

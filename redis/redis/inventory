@@ -1,0 +1,8 @@
+## [master] includes all Redis master nodes (required)
+## [data] includes all Redis replica nodes (optional inputs, group itself must exist)
+
+[master]
+# <master-hostname>
+
+[data]
+# <replica-hostname> master_host=<associated-master-hostname>

@@ -8,13 +8,13 @@ data "template_file" "master" {
   }
 }
 
-data "template_file" "slave" {
-  template = "${file("${path.module}/cloud-init/slave-init.yaml")}"
-  count = "${var.slave_count}"
+data "template_file" "replica" {
+  template = "${file("${path.module}/cloud-init/replica-init.yaml")}"
+  count = "${var.replica_count}"
 
   vars {
     domain = "${var.domain}"
-    hostname = "redis-slave-${count.index}"
+    hostname = "redis-replica-${count.index}"
   }
 }
 

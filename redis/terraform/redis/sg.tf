@@ -8,6 +8,7 @@ resource "cloudstack_security_group_rule" "sg-redis-rules" {
   rule {
     protocol = "tcp"
     ports = ["6379", "16379"]
+    user_security_group_list = ["sg-redis"]
   }
 
   rule {

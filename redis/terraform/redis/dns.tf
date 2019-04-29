@@ -16,12 +16,12 @@ resource "exoscale_domain_record" "exodis_upstream_master_record" {
   ttl = "${var.domain_ttl}"
 }
 
-resource "exoscale_domain_record" "exodis_slave_record" {
-  count = "${var.slave_count}"
+resource "exoscale_domain_record" "exodis_replica_record" {
+  count = "${var.replica_count}"
   domain = "${var.domain}"
-  name = "${element(exoscale_compute.redis_slave.*.name, count.index)}"
+  name = "${element(exoscale_compute.redis_replica.*.name, count.index)}"
   record_type = "A"
-  content = "${element(exoscale_compute.redis_slave.*.ip_address, count.index)}"
+  content = "${element(exoscale_compute.redis_replica.*.ip_address, count.index)}"
   ttl = "${var.domain_ttl}"
 }
 
