@@ -16,5 +16,9 @@ dns_mode: coredns
 resolvconf_mode: host_resolvconf
 nameservers: ["8.8.8.8", "8.8.4.4"]
 
+# Internal loadbalancing
+loadbalancer_apiserver_localhost: true
+loadbalancer_apiserver_type: haproxy
+
 # Addons
 helm_enabled: true

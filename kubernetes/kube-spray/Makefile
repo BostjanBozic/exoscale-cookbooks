@@ -1,8 +1,8 @@
 boostrap:
-	./kubespray_bootstrap.sh bootstrap;
+	@./kubespray_bootstrap.sh bootstrap;
 
 scale:
-	./kubespray_bootstrap.sh scale;
+	@./kubespray_bootstrap.sh scale;
 
 clean:
-	rm -rf kubespray;
+	@rm -rf kubespray;
