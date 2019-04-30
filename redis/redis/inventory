@@ -1,5 +1,5 @@
-## [master] includes all Redis master nodes (required)
-## [replica] includes all Redis replica nodes (optional inputs, group itself must exist)
+## [master] includes all Redis master nodes
+## [replica] includes all Redis replica nodes
 
 [master]
 # <master-hostname>

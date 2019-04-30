@@ -10,4 +10,4 @@
   roles:
     - BostjanBozic.redis
   vars:
-    - replicaof: "{{ master_host }} {{ redis_port }}"
+    - redis_replicaof: "{{ master_host }} {{ redis_port }}"

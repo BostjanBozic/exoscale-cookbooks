@@ -3,6 +3,8 @@ Scripts to provision Redis in variety of configurations using [Terraform](https:
 * `Redis` version: `v5.0.4`
 * Underlying operating system: `Linux RedHat 7.6 64-bit`
 
+**Note**: Redis Sentinel deployment is currently not available.
+
 ## Workflow
 * Create `terraform.tfvars` file
 * Run Terraform scripts
