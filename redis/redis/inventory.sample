@@ -1,0 +1,7 @@
+[master]
+redis-master-[0:2].exodis.eu
+
+[replica]
+redis-replica-0.exodis.eu master_host=redis-master-0.exodis.eu
+redis-replica-1.exodis.eu master_host=redis-master-1.exodis.eu
+redis-replica-2.exodis.eu master_host=redis-master-2.exodis.eu
