@@ -7,7 +7,7 @@ resource "cloudstack_security_group_rule" "sg-kafka-rules" {
 
   rule {
     protocol = "tcp"
-    ports = ["2181", "2888", "3888", "9091", "9092"]
+    ports = ["2181", "2888", "3888", "8083", "9091", "9092"]
     user_security_group_list = ["sg-kafka"]
   }
 
