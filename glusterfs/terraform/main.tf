@@ -50,15 +50,15 @@ provider "template" {}
 # Modules
 #
 module "ssh" {
-  source = "ssh"
+  source = "./ssh"
   public_key_file = "${var.public_key_file}"
 }
 module "dns" {
-  source = "dns"
+  source = "./dns"
   domain = "${var.domain}"
 }
 module "glusterfs" {
-  source = "glusterfs"
+  source = "./glusterfs"
   private_key_file = "${var.private_key_file}"
   installer_ip = "${var.installer_ip}"
   zone = "${var.zone}"
