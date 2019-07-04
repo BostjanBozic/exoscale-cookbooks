@@ -1,5 +1,4 @@
 resource "exoscale_compute" "redis_master" {
-  depends_on = ["cloudstack_security_group.sg-redis"]
   count = "${var.master_count}"
   template =  "Linux RedHat 7.6 64-bit"
   zone = "${var.zone}"
@@ -31,7 +30,6 @@ resource "exoscale_compute" "redis_master" {
 }
 
 resource "exoscale_compute" "redis_replica" {
-  depends_on = ["cloudstack_security_group.sg-redis"]
   count = "${var.replica_count}"
   template =  "Linux RedHat 7.6 64-bit"
   zone = "${var.zone}"
@@ -63,7 +61,6 @@ resource "exoscale_compute" "redis_replica" {
 }
 
 resource "exoscale_compute" "redis_sentinel" {
-  depends_on = ["cloudstack_security_group.sg-redis"]
   count = "${var.sentinel_count}"
   template =  "Linux RedHat 7.6 64-bit"
   zone = "${var.zone}"
