@@ -1,5 +1,4 @@
 resource "exoscale_compute" "es_master" {
-  depends_on = ["cloudstack_security_group.sg-elasticsearch"]
   count = "${var.master_count}"
   template = "Linux RedHat 7.6 64-bit"
   zone = "${var.zone}"
@@ -31,7 +30,6 @@ resource "exoscale_compute" "es_master" {
 }
 
 resource "exoscale_compute" "es_data" {
-  depends_on = ["cloudstack_security_group.sg-elasticsearch"]
   count = "${var.data_count}"
   template = "Linux RedHat 7.6 64-bit"
   zone = "${var.zone}"
@@ -63,7 +61,6 @@ resource "exoscale_compute" "es_data" {
 }
 
 resource "exoscale_compute" "es_ingest" {
-  depends_on = ["cloudstack_security_group.sg-elasticsearch"]
   count = "${var.ingest_count}"
   template = "Linux RedHat 7.6 64-bit"
   zone = "${var.zone}"
