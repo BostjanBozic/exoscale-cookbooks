@@ -56,7 +56,7 @@ module "glusterfs" {
   private_key_file = "${var.private_key_file}"
   installer_ip = "${var.installer_ip}"
   zone = "${var.zone}"
-  domain = "${var.domain}"
+  domain = "${module.dns.domain_name}"
   domain_ttl = "${var.domain_ttl}"
   node_count = "${var.node_count}"
   node_size = "${var.node_size}"

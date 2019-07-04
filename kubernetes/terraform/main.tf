@@ -73,7 +73,7 @@ module "kubernetes" {
   private_key_file = "${var.private_key_file}"
   installer_ip = "${var.installer_ip}"
   zone = "${var.zone}"
-  domain = "${var.domain}"
+  domain = "${module.dns.domain_name}"
   domain_ttl = "${var.domain_ttl}"
   master_count = "${var.master_count}"
   master_size = "${var.master_size}"

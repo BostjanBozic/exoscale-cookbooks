@@ -1,4 +1,5 @@
 resource "exoscale_compute" "okd_master" {
+  depends_on = ["exoscale_security_group.sg-openshift"]
   count = "${var.master_count}"
   template = "Linux RedHat 7.6 64-bit"
   zone = "${var.zone}"
@@ -30,6 +31,7 @@ resource "exoscale_compute" "okd_master" {
 }
 
 resource "exoscale_compute" "okd_infra" {
+  depends_on = ["exoscale_security_group.sg-openshift"]
   count = "${var.infra_count}"
   template = "Linux RedHat 7.6 64-bit"
   zone = "${var.zone}"
@@ -61,6 +63,7 @@ resource "exoscale_compute" "okd_infra" {
 }
 
 resource "exoscale_compute" "okd_node" {
+  depends_on = ["exoscale_security_group.sg-openshift"]
   count = "${var.node_count}"
   template = "Linux RedHat 7.6 64-bit"
   zone = "${var.zone}"
@@ -92,6 +95,7 @@ resource "exoscale_compute" "okd_node" {
 }
 
 resource "exoscale_compute" "okd_lb" {
+  depends_on = ["exoscale_security_group.sg-openshift"]
   count = "${var.lb_count}"
   template = "Linux RedHat 7.6 64-bit"
   zone = "${var.zone}"

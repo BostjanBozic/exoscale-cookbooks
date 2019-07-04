@@ -1,4 +1,5 @@
 resource "exoscale_compute" "k8s_master" {
+  depends_on = ["exoscale_security_group.sg-k8s"]
   count = "${var.master_count}"
   template = "Linux CoreOS 1967.5.0 64-bit"
   zone = "${var.zone}"
@@ -30,6 +31,7 @@ resource "exoscale_compute" "k8s_master" {
 }
 
 resource "exoscale_compute" "k8s_etcd" {
+  depends_on = ["exoscale_security_group.sg-k8s"]
   count = "${var.etcd_count}"
   template = "Linux CoreOS 1967.5.0 64-bit"
   zone = "${var.zone}"
@@ -61,6 +63,7 @@ resource "exoscale_compute" "k8s_etcd" {
 }
 
 resource "exoscale_compute" "k8s_node" {
+  depends_on = ["exoscale_security_group.sg-k8s"]
   count = "${var.node_count}"
   template = "Linux CoreOS 1967.5.0 64-bit"
   zone = "${var.zone}"
