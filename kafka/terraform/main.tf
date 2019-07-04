@@ -33,12 +33,6 @@ provider "exoscale" {
   token = "${var.api_key}"
   secret = "${var.secret_key}"
 }
-provider "cloudstack" {
-  api_url = "https://api.exoscale.ch/compute"
-  api_key = "${var.api_key}"
-  secret_key = "${var.secret_key}"
-  timeout =60
-}
 provider "template" {}
 
 
@@ -46,15 +40,15 @@ provider "template" {}
 # Modules
 #
 module "ssh" {
-  source = "ssh"
+  source = "./ssh"
   public_key_file = "${var.public_key_file}"
 }
 module "dns" {
-  source = "dns"
+  source = "./dns"
   domain = "${var.domain}"
 }
 module "kafka" {
-  source = "kafka"
+  source = "./kafka"
   private_key_file = "${var.private_key_file}"
   installer_ip = "${var.installer_ip}"
   zone = "${var.zone}"

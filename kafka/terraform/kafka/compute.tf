@@ -1,5 +1,4 @@
 resource "exoscale_compute" "kafka_node" {
-  depends_on = ["cloudstack_security_group.sg-kafka"]
   count = "${var.node_count}"
   template = "Linux RedHat 7.6 64-bit"
   zone = "${var.zone}"
