@@ -16,10 +16,10 @@ resource "exoscale_domain_record" "exoshift_infra_record" {
   ttl = "${var.domain_ttl}"
 }
 
-resource "exoscale_domain_record" "exoshift_upstream_infra_record" {
+resource "exoscale_domain_record" "exoshift_upstream_record" {
   count = "${var.infra_count}"
   domain = "${var.domain}"
-  name = "upstream-infra-okd"
+  name = "*.upstream-okd"
   record_type = "A"
   content = "${element(exoscale_compute.okd_infra.*.ip_address, count.index)}"
   ttl = "${var.domain_ttl}"
@@ -33,16 +33,6 @@ resource "exoscale_domain_record" "exoshift_node_record" {
   content = "${element(exoscale_compute.okd_node.*.ip_address, count.index)}"
   ttl = "${var.domain_ttl}"
 }
-
-resource "exoscale_domain_record" "exoshift_upstream_record" {
-  count = "${var.node_count}"
-  domain = "${var.domain}"
-  name = "upstream-okd"
-  record_type = "A"
-  content = "${element(exoscale_compute.okd_node.*.ip_address, count.index)}"
-  ttl = "${var.domain_ttl}"
-}
-
 
 resource "exoscale_domain_record" "exoshift_lb_record" {
   count = "${var.lb_count}"
