@@ -24,7 +24,7 @@ else
     exit 1;
 fi
 
-# Clone Kubespray Github repository
+# Clone OpenShift Github repository
 if [ ! -d "openshift-ansible" ]; then
     GIT_URL="https://github.com/openshift/openshift-ansible"
     git clone ${GIT_URL};

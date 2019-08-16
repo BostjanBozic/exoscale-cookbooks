@@ -1,13 +1,13 @@
-# Openshift OKD on Exoscale
-Scripts to provision Openshift OKD cluster using [Terraform](https://www.terraform.io) and [Openshift](https://github.com/openshift/openshift-ansible) projects.
-* `Openshift` version: `v3.11.0`
+# OpenShift OKD on Exoscale
+Scripts to provision OpenShift OKD cluster using [Terraform](https://www.terraform.io) and [OpenShift](https://github.com/openshift/openshift-ansible) projects.
+* `OpenShift` version: `v3.11.0`
 * Underlying operating system: `Linux RedHat 7.6 64-bit`
 
 ## Workflow
 * Create `terraform.tfvars` file
 * Run Terraform scripts
-* Set up Openshift `inventory` file
-* Run Kubespray Ansible playbooks
+* Set up OpenShift `inventory` file
+* Run OpenShift Ansible playbooks
 
 ## Prerequisites
 * Install Exoscale Terraform provider:
@@ -44,20 +44,20 @@ domain_ttl = "Prefer TTL parameter for your domain (default to 600)"
 # Connectivity settings
 installer_ip = "Your host IP address with mask (x.x.x.x/x)"
 
-# Openshift variables
+# OpenShift variables
 zone = "Exoscale zone for spinning up VMs (default to at-vie-1)"
-master_count = "Number of Openshift master nodes (default to 3)"
-master_size = "Instance size for Openshift master nodes (default to "Huge")"
-master_disk = "Disk size for Openshift master nodes (default to 100)"
-infra_count = "Number of Openshift infra nodes (default to 2)"
-infra_size = "Instance size for Openshift infra nodes (default to "Huge")"
-infra_disk = "Disk size for Openshift infra nodes (default to 200)"
-node_count = "Number of Openshift worker nodes (default to 3)"
-node_size = "Instance size for Openshift worker nodes (default to "Huge")"
-node_disk = "Disk size for Openshift worker nodes (default to 400)"
-lb_count = "Number of Openshift loadbalancer nodes (default to 1)"
-lb_size = "Instance size for Openshift loadbalancer nodes (default to "Huge")"
-lb_disk = "Disk size for Openshift loadbalancer nodes (default to 20)"
+master_count = "Number of OpenShift master nodes (default to 3)"
+master_size = "Instance size for OpenShift master nodes (default to "Huge")"
+master_disk = "Disk size for OpenShift master nodes (default to 100)"
+infra_count = "Number of OpenShift infra nodes (default to 2)"
+infra_size = "Instance size for OpenShift infra nodes (default to "Huge")"
+infra_disk = "Disk size for OpenShift infra nodes (default to 200)"
+node_count = "Number of OpenShift worker nodes (default to 3)"
+node_size = "Instance size for OpenShift worker nodes (default to "Huge")"
+node_disk = "Disk size for OpenShift worker nodes (default to 400)"
+lb_count = "Number of OpenShift loadbalancer nodes (default to 1)"
+lb_size = "Instance size for OpenShift loadbalancer nodes (default to "Huge")"
+lb_disk = "Disk size for OpenShift loadbalancer nodes (default to 20)"
 ```
 
 In case domain already exists, remove `dns` folder and module `dns` in `main.tf`.
@@ -96,18 +96,18 @@ Next run `make create-infrastructure` and follow procedure.
 
 If all goes well, Terraform should report success message and your VMs are ready to install Openshift.
 
-## Bootstrap Openshift OKD Cluster
-Script uses [Openshift playbooks](https://github.com/openshift/openshift-ansible) for setting up Openshift OKD cluster.
+## Bootstrap OpenShift OKD Cluster
+Script uses [OpenShift playbooks](https://github.com/openshift/openshift-ansible) for setting up OpenShift OKD cluster.
 
 Move to `openshift` directory and update `.exokube.rc` and `inventory` files.
 * Update `.exokube.rc` based on your desired configuration
 * Update `inventory` file based on instructions within file. As a sample configuration, `inventory.sample` is provided
 
-Openshift settings are passed to Ansible playbooks via `inventory` file. In case of any parameter modifications, just adjust `inventory`. For more details and additional parameters, check official Openshift [documentation](https://docs.okd.io/3.11/install/configuring_inventory_file.html).
+OpenShift settings are passed to Ansible playbooks via `inventory` file. In case of any parameter modifications, just adjust `inventory`. For more details and additional parameters, check official OpenShift [documentation](https://docs.okd.io/3.11/install/configuring_inventory_file.html).
 
-For Openshift installation, hosts need to be set up before Openshift can be installed - this is done with `prerequisites.yml` playbook. After that Openshift can be deployed using `deploy_cluster.yml` playbook. They can be invoked using `Make`:
-* `make prepare` to prepare hosts for Openshift installation
-* `make deploy` to deploy Openshift cluster
+For OpenShift installation, hosts need to be set up before OpenShift can be installed - this is done with `prerequisites.yml` playbook. After that OpenShift can be deployed using `deploy_cluster.yml` playbook. They can be invoked using `Make`:
+* `make prepare` to prepare hosts for OpenShift installation
+* `make deploy` to deploy OpenShift cluster
 
 Now your cluster is ready and you can access it via `oc` from one of master nodes.
 
