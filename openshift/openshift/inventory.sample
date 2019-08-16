@@ -24,6 +24,10 @@ ansible_become=yes
 openshift_deployment_type=origin
 openshift_release="3.11"
 
+openshift_use_crio=True
+openshift_use_crio_only=False
+openshift_crio_enable_docker_gc=True
+
 openshift_master_cluster_hostname=okd-lb-0.exoshift.eu
 openshift_master_cluster_public_hostname=okd-lb-0.exoshift.eu
 openshift_master_cluster_method=native
@@ -33,7 +37,7 @@ openshift_docker_additional_registries=index.docker.io:443
 
 openshift_master_default_subdomain=upstream-okd.exoshift.eu
 os_sdn_network_plugin_name=redhat/openshift-ovs-multitenant
+osm_cluster_network_cidr=10.52.0.0/14
+openshift_portal_net=10.56.0.0/16
 
-openshift_use_crio=True
-openshift_use_crio_only=False
-openshift_crio_enable_docker_gc=True
+openshift_metrics_install_metrics=true
