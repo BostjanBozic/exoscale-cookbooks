@@ -1,7 +1,7 @@
 # Elasticsearch on Exoscale
 Scripts to provision Elasticsearch cluster using [Terraform](https://www.terraform.io) and [Ansible](https://www.ansible.com/) projects.
-* `Elasticsearch` version: `v6.6.0`
-* `Kibana` version: `v6.6.0`
+* `Elasticsearch` version: `v7.7.1`
+* `Kibana` version: `v7.7.1`
 * Underlying operating system: `Linux CentOS 7.6 64-bit`
 
 ## Workflow

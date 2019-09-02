@@ -1,4 +1,4 @@
-ansible_ssh_user: cloud-user
+ansible_ssh_user: centos
 es_version: 6.6.0
 es_cluster_name: elasticsearch
 es_data: /data/elasticsearch/data

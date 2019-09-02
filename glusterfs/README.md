@@ -83,7 +83,7 @@ Terraform has been successfully initialized!
 
 Next run `make create-infrastructure` and follow procedure.
 
-If all goes well, Terraform should report success message and your VMs are ready to set up GlusterFS cluster.
+If all goes well, Terraform should report success message and your VMs are ready to set up GlusterFS cluster (sometimes packages are not installed, even if VM is available; check if `gluster` binary is available on machines before bootstraping cluster).
 
 ## Bootstrap GlusterFS Cluster
 Script uses [gluster_volume Ansible module](https://docs.ansible.com/ansible/latest/modules/gluster_volume_module.html) for setting up GlusterFS cluster.
@@ -95,6 +95,8 @@ GlusterFS settings are passed to Ansible playbooks via `group_vars/all.yml` file
 
 GlusterFS cluster can be deployed using `playbooks/deploy.yml` playbook. This can be invoked using `Make`:
 * `make configure` to configure GlusterFS cluster
+
+In case playbook fails at step `Set up GlusterFS volume`, just run playbook again.
 
 Now your cluster is ready to use.
 
