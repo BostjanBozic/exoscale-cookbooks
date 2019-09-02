@@ -34,7 +34,7 @@ variable "gluster_version" {
 # Provider settings
 #
 provider "exoscale" {
-  token = "${var.api_key}"
+  key = "${var.api_key}"
   secret = "${var.secret_key}"
 }
 provider "template" {}
