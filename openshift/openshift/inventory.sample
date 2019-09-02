@@ -19,7 +19,7 @@ etcd
 lb
 
 [OSEv3:vars]
-ansible_user=cloud-user
+ansible_user=centos
 ansible_become=yes
 openshift_deployment_type=origin
 openshift_release="3.11"
