@@ -26,7 +26,7 @@ else
 fi
 
 # Fetch Ansible role
-ansible-galaxy install BostjanBozic.redis --force -p playbooks/roles
+ansible-galaxy install BostjanBozic.redis,5.0.5 --force -p playbooks/roles
 
 # Run Ansible playbook
 ansible-playbook -i inventory ${playbook_file} --private-key="${EXODIS_KEYFILE}"

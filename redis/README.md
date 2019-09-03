@@ -1,6 +1,6 @@
 # Redis on Exoscale
 Scripts to provision Redis in variety of configurations using [Terraform](https://www.terraform.io) and [Ansible](https://www.ansible.com/) projects.
-* `Redis` version: `v5.0.4`
+* `Redis` version: `v5.0.5`
 * Underlying operating system: `Linux CentOS 7.6 64-bit`
 
 **Note**: Redis Sentinel deployment is currently not available.
