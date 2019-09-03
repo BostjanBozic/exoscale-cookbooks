@@ -1,7 +1,7 @@
 resource "exoscale_compute" "redis_master" {
   depends_on = ["exoscale_security_group.sg-redis"]
   count = "${var.master_count}"
-  template =  "Linux RedHat 7.6 64-bit"
+  template =  "Linux CentOS 7.6 64-bit"
   zone = "${var.zone}"
   size = "${var.master_size}"
   disk_size = "${var.master_disk}"
@@ -11,7 +11,7 @@ resource "exoscale_compute" "redis_master" {
   user_data = "${base64encode(element(data.template_file.master.*.rendered, count.index))}"
 
   connection {
-    user = "cloud-user"
+    user = "centos"
     type = "ssh"
     agent = false
     host = "${self.ip_address}"
@@ -20,12 +20,12 @@ resource "exoscale_compute" "redis_master" {
 
   provisioner "file" {
     content = "${file(var.private_key_file)}"
-    destination = "/home/cloud-user/.ssh/id_rsa"
+    destination = "/home/centos/.ssh/id_rsa"
   }
 
   provisioner "remote-exec" {
     inline = [
-      "chmod 600 /home/cloud-user/.ssh/id_rsa",
+      "chmod 600 /home/centos/.ssh/id_rsa",
     ]
   }
 }
@@ -33,7 +33,7 @@ resource "exoscale_compute" "redis_master" {
 resource "exoscale_compute" "redis_replica" {
   depends_on = ["exoscale_security_group.sg-redis"]
   count = "${var.replica_count}"
-  template =  "Linux RedHat 7.6 64-bit"
+  template =  "Linux CentOS 7.6 64-bit"
   zone = "${var.zone}"
   size = "${var.replica_size}"
   disk_size = "${var.replica_disk}"
@@ -43,7 +43,7 @@ resource "exoscale_compute" "redis_replica" {
   user_data = "${base64encode(element(data.template_file.replica.*.rendered, count.index))}"
 
   connection {
-    user = "cloud-user"
+    user = "centos"
     type = "ssh"
     agent = false
     host = "${self.ip_address}"
@@ -52,12 +52,12 @@ resource "exoscale_compute" "redis_replica" {
 
   provisioner "file" {
     content = "${file(var.private_key_file)}"
-    destination = "/home/cloud-user/.ssh/id_rsa"
+    destination = "/home/centos/.ssh/id_rsa"
   }
 
   provisioner "remote-exec" {
     inline = [
-      "chmod 600 /home/cloud-user/.ssh/id_rsa",
+      "chmod 600 /home/centos/.ssh/id_rsa",
     ]
   }
 }
@@ -65,7 +65,7 @@ resource "exoscale_compute" "redis_replica" {
 resource "exoscale_compute" "redis_sentinel" {
   depends_on = ["exoscale_security_group.sg-redis"]
   count = "${var.sentinel_count}"
-  template =  "Linux RedHat 7.6 64-bit"
+  template =  "Linux CentOS 7.6 64-bit"
   zone = "${var.zone}"
   size = "${var.sentinel_size}"
   disk_size = "${var.sentinel_disk}"
@@ -75,7 +75,7 @@ resource "exoscale_compute" "redis_sentinel" {
   user_data = "${base64encode(element(data.template_file.sentinel.*.rendered, count.index))}"
 
   connection {
-    user = "cloud-user"
+    user = "centos"
     type = "ssh"
     agent = false
     host = "${self.ip_address}"
@@ -84,12 +84,12 @@ resource "exoscale_compute" "redis_sentinel" {
 
   provisioner "file" {
     content = "${file(var.private_key_file)}"
-    destination = "/home/cloud-user/.ssh/id_rsa"
+    destination = "/home/centos/.ssh/id_rsa"
   }
 
   provisioner "remote-exec" {
     inline = [
-      "chmod 600 /home/cloud-user/.ssh/id_rsa",
+      "chmod 600 /home/centos/.ssh/id_rsa",
     ]
   }
 }

@@ -1,5 +1,5 @@
-ansible_ssh_user: cloud-user
-gluster_replica_count: 2
+ansible_ssh_user: centos
+gluster_replica_count: 3
 gluster_brick_dir: /data/glusterfs/brick1
 gluster_mount_dir: /glusterfs
 gluster_volume_name: exogluster

@@ -11,9 +11,8 @@ Scripts to provision Kubernetes cluster using [Terraform](https://www.terraform.
 * Run Kubespray Ansible playbooks
 
 ## Prerequisites
-* Install Exoscale Terraform provider:
-    * [Provider](https://github.com/exoscale/terraform-provider-exoscale)
-    * [Documentation](https://www.terraform.io/docs/configuration/providers.html#third-party-plugins)
+* Install Terraform:
+    * [Terraform](https://www.terraform.io/downloads.html)
 * Install following Python packages:
     * `ansible` (v2.7.8 or newer, but not 2.8.x)
     * `jinja2` (2.9 or newer)
@@ -63,17 +62,16 @@ In case domain already exists, remove `dns` folder and module `dns` in `main.tf`
 With this, everything should be set up. Go to `/terraform` root directory and run `terraform init`. This will initialize Terraform environment. Output should be similar to this:
 ```
 Initializing modules...
-- module.ssh
-  Getting source "ssh"
-- module.dns
-  Getting source "dns"
-- module.kubernetes
-  Getting source "kubernetes"
+- dns in dns
+- kubernetes in kubernetes
+- ssh in ssh
+
+Initializing the backend...
 
 Initializing provider plugins...
-- Checking for available provider plugins on https://releases.hashicorp.com...
-- Downloading plugin for provider "cloudstack" (0.2.0)...
-- Downloading plugin for provider "template" (2.1.0)...
+- Checking for available provider plugins...
+- Downloading plugin for provider "template" (terraform-providers/template) 2.1.2...
+- Downloading plugin for provider "exoscale" (terraform-providers/exoscale) 0.12.1...
 
 The following providers do not have any version constraints in configuration,
 so the latest version was installed.
@@ -83,8 +81,7 @@ changes, it is recommended to add version = "..." constraints to the
 corresponding provider blocks in configuration, with the constraint strings
 suggested below.
 
-* provider.cloudstack: version = "~> 0.2"
-* provider.exoscale: version = "~> 0.9"
+* provider.exoscale: version = "~> 0.12"
 * provider.template: version = "~> 2.1"
 
 Terraform has been successfully initialized!

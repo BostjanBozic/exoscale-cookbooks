@@ -1,0 +1,2 @@
+ansible_ssh_user: centos
+redis_version: 5.0.5

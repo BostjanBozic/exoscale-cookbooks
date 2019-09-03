@@ -1,7 +1,7 @@
 resource "exoscale_compute" "es_master" {
   depends_on = ["exoscale_security_group.sg-elasticsearch"]
   count = "${var.master_count}"
-  template = "Linux RedHat 7.6 64-bit"
+  template = "Linux CentOS 7.6 64-bit"
   zone = "${var.zone}"
   size = "${var.master_size}"
   disk_size = "${var.master_disk}"
@@ -11,7 +11,7 @@ resource "exoscale_compute" "es_master" {
   user_data = "${base64encode(element(data.template_file.master.*.rendered, count.index))}"
 
   connection {
-    user = "cloud-user"
+    user = "centos"
     type = "ssh"
     agent = false
     host = "${self.ip_address}"
@@ -20,12 +20,12 @@ resource "exoscale_compute" "es_master" {
 
   provisioner "file" {
     content = "${file(var.private_key_file)}"
-    destination = "/home/cloud-user/.ssh/id_rsa"
+    destination = "/home/centos/.ssh/id_rsa"
   }
 
   provisioner "remote-exec" {
     inline = [
-      "chmod 600 /home/cloud-user/.ssh/id_rsa",
+      "chmod 600 /home/centos/.ssh/id_rsa",
     ]
   }
 }
@@ -33,7 +33,7 @@ resource "exoscale_compute" "es_master" {
 resource "exoscale_compute" "es_data" {
   depends_on = ["exoscale_security_group.sg-elasticsearch"]
   count = "${var.data_count}"
-  template = "Linux RedHat 7.6 64-bit"
+  template = "Linux CentOS 7.6 64-bit"
   zone = "${var.zone}"
   size = "${var.data_size}"
   disk_size = "${var.data_disk}"
@@ -43,7 +43,7 @@ resource "exoscale_compute" "es_data" {
   user_data = "${base64encode(element(data.template_file.data.*.rendered, count.index))}"
 
   connection {
-    user = "cloud-user"
+    user = "centos"
     type = "ssh"
     agent = false
     host = "${self.ip_address}"
@@ -52,12 +52,12 @@ resource "exoscale_compute" "es_data" {
 
   provisioner "file" {
     content = "${file(var.private_key_file)}"
-    destination = "/home/cloud-user/.ssh/id_rsa"
+    destination = "/home/centos/.ssh/id_rsa"
   }
 
   provisioner "remote-exec" {
     inline = [
-      "chmod 600 /home/cloud-user/.ssh/id_rsa",
+      "chmod 600 /home/centos/.ssh/id_rsa",
     ]
   }
 }
@@ -65,7 +65,7 @@ resource "exoscale_compute" "es_data" {
 resource "exoscale_compute" "es_ingest" {
   depends_on = ["exoscale_security_group.sg-elasticsearch"]
   count = "${var.ingest_count}"
-  template = "Linux RedHat 7.6 64-bit"
+  template = "Linux CentOS 7.6 64-bit"
   zone = "${var.zone}"
   size = "${var.ingest_size}"
   disk_size = "${var.ingest_disk}"
@@ -75,7 +75,7 @@ resource "exoscale_compute" "es_ingest" {
   user_data = "${base64encode(element(data.template_file.ingest.*.rendered, count.index))}"
 
   connection {
-    user = "cloud-user"
+    user = "centos"
     type = "ssh"
     agent = false
     host = "${self.ip_address}"
@@ -84,12 +84,12 @@ resource "exoscale_compute" "es_ingest" {
 
   provisioner "file" {
     content = "${file(var.private_key_file)}"
-    destination = "/home/cloud-user/.ssh/id_rsa"
+    destination = "/home/centos/.ssh/id_rsa"
   }
 
   provisioner "remote-exec" {
     inline = [
-      "chmod 600 /home/cloud-user/.ssh/id_rsa",
+      "chmod 600 /home/centos/.ssh/id_rsa",
     ]
   }
 }
