@@ -6,6 +6,13 @@
   tags:
     - configure
   tasks:
+    - name: FirewallD config | Ensuring glusterfs service is added to rule
+      firewalld:
+        service: glusterfs
+        permanent: true
+        state: enabled
+        immediate: yes
+
     - name: GlusterFS config | Ensuring GlusterFS brick and mount directory exist
       file: "path={{item}} state=directory mode=0775"
       with_items:

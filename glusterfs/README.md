@@ -96,7 +96,7 @@ GlusterFS settings are passed to Ansible playbooks via `group_vars/all.yml` file
 GlusterFS cluster can be deployed using `playbooks/deploy.yml` playbook. This can be invoked using `Make`:
 * `make configure` to configure GlusterFS cluster
 
-In case playbook fails at step `Set up GlusterFS volume`, just run playbook again.
+In case playbook fails at step `Set up GlusterFS volume`, just run playbook again (this can occur if single replica pool).
 
 Now your cluster is ready to use.
 
