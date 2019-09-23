@@ -42,3 +42,12 @@ resource "exoscale_domain_record" "exoshift_lb_record" {
   content = "${element(exoscale_compute.okd_lb.*.ip_address, count.index)}"
   ttl = "${var.domain_ttl}"
 }
+
+resource "exoscale_domain_record" "exoshift_openshift_record" {
+  count = "${var.lb_count}"
+  domain = "${var.domain}"
+  name = "openshift"
+  record_type = "A"
+  content = "${element(exoscale_compute.okd_lb.*.ip_address, count.index)}"
+  ttl = "${var.domain_ttl}"
+}

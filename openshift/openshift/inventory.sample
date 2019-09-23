@@ -10,7 +10,7 @@ okd-infra-[0:1].exoshift.eu openshift_node_group_name="node-config-infra-crio"
 okd-node-[0:4].exoshift.eu openshift_node_group_name="node-config-compute-crio"
 
 [lb]
-okd-lb-0.exoshift.eu
+okd-lb-[0:1].exoshift.eu
 
 [OSEv3:children]
 masters
@@ -28,12 +28,12 @@ openshift_use_crio=True
 openshift_use_crio_only=False
 openshift_crio_enable_docker_gc=True
 
-openshift_master_cluster_hostname=okd-lb-0.exoshift.eu
-openshift_master_cluster_public_hostname=okd-lb-0.exoshift.eu
+openshift_master_cluster_hostname=openshift.exoshift.eu
+openshift_master_cluster_public_hostname=openshift.exoshift.eu
 openshift_master_cluster_method=native
 openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider'}]
 os_firewall_use_firewalld=true
-openshift_docker_additional_registries=index.docker.io:443
+openshift_docker_additional_registries=index.docker.io
 
 openshift_master_default_subdomain=upstream-okd.exoshift.eu
 os_sdn_network_plugin_name=redhat/openshift-ovs-multitenant
