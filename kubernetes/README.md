@@ -1,6 +1,6 @@
 # Kubernetes on Exoscale
 Scripts to provision Kubernetes cluster using [Terraform](https://www.terraform.io) and [Kubespray](https://github.com/kubernetes-sigs/kubespray) projects.
-* `kubespray` version: `v2.11.0` (Kubernetes version `v1.15.3`)
+* `kubespray` version: `v2.12.0` (Kubernetes version `v1.16.3`)
 * Underlying operating system: `Linux CoreOS 2135 64-bit`
 * project by default works only with 3 `etcd` nodes, if different ammount is required, update files in `terraform/kubernetes/cloud-init` accordingly
 
@@ -21,7 +21,7 @@ Scripts to provision Kubernetes cluster using [Terraform](https://www.terraform.
     * `hvac`
     * `jmespath`
 * Register domain
-* Generate SSH keypair (`ssh-keygen`)
+* Generate SSH keypair (`ssh-keygen`) - you can use `make create-ssh-keypair` target to generate new one
 * Fetch Exoscale API key and Secret Key (Account > Profile > API Keys)
 
 ## Bootstrap VMs Using Terraform
@@ -81,7 +81,7 @@ changes, it is recommended to add version = "..." constraints to the
 corresponding provider blocks in configuration, with the constraint strings
 suggested below.
 
-* provider.exoscale: version = "~> 0.12"
+* provider.exoscale: version = "~> 0.14"
 * provider.template: version = "~> 2.1"
 
 Terraform has been successfully initialized!
@@ -108,8 +108,6 @@ After installation is complete, log into any master node and copy `/etc/kubernet
 
 ## To Do List
 * automation of Ansible inventory file generation
-* set up post-install scripts (fixups, kube-config, specific deployments)
-* set up storage of `.tfstate` file on Exoscale Simple Object Storage
 
 ## Credits
 * Maintainer: [Bostjan Bozic](https://github.com/BostjanBozic)

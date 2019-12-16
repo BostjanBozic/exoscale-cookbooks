@@ -30,4 +30,3 @@ data "template_file" "node" {
     ssh_privkey = "${file("${var.private_key_file}")}"
   }
 }
-

@@ -5,11 +5,5 @@ hostname: ${hostname}
 
 coreos:
   update:
-    reboot-strategy: "etcd-lock"
+    group: "stable"
 
-  locksmith:
-    endpoint: "https://k8s-etcd-0.${domain}:2379,https://k8s-etcd-1.${domain}:2379,https://k8s-etcd-2.${domain}:2379"
-    group: "etcd"
-    etcd_cafile: "/etc/ssl/etcd/ssl/ca.pem"
-    etcd_certfile: "/etc/ssl/etcd/ssl/admin-k8s-etcd-${index}.pem"
-    etcd_keyfile: "/etc/ssl/etcd/ssl/admin-k8s-etcd-${index}-key.pem"
