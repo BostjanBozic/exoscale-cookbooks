@@ -33,7 +33,6 @@ create-ssh-keypair:
 	read answer_ssh; \
 	if [ "$${answer_ssh}" == "y" ]; then \
 		ssh-keygen -f ~/.ssh/$${key_name}; \
-		chmod 600 ~/.ssh/$${key_name}; \
 	else \
 		echo "SSH keypair not created."; \
 	fi \
