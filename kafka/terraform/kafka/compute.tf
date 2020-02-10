@@ -1,7 +1,7 @@
 resource "exoscale_compute" "kafka_node" {
-  depends_on = ["exoscale_security_group.sg-kafka"]
+  depends_on = [exoscale_security_group.sg-kafka]
   count = "${var.node_count}"
-  template = "Linux RedHat 7.6 64-bit"
+  template = "Linux CentOS 7 64-bit"
   zone = "${var.zone}"
   size = "${var.node_size}"
   disk_size = "${var.node_disk}"

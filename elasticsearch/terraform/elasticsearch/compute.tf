@@ -1,7 +1,7 @@
 resource "exoscale_compute" "es_master" {
-  depends_on = ["exoscale_security_group.sg-elasticsearch"]
+  depends_on = [exoscale_security_group.sg-elasticsearch]
   count = "${var.master_count}"
-  template = "Linux CentOS 7.6 64-bit"
+  template = "Linux CentOS 7 64-bit"
   zone = "${var.zone}"
   size = "${var.master_size}"
   disk_size = "${var.master_disk}"
@@ -31,9 +31,9 @@ resource "exoscale_compute" "es_master" {
 }
 
 resource "exoscale_compute" "es_data" {
-  depends_on = ["exoscale_security_group.sg-elasticsearch"]
+  depends_on = [exoscale_security_group.sg-elasticsearch]
   count = "${var.data_count}"
-  template = "Linux CentOS 7.6 64-bit"
+  template = "Linux CentOS 7 64-bit"
   zone = "${var.zone}"
   size = "${var.data_size}"
   disk_size = "${var.data_disk}"
@@ -63,9 +63,9 @@ resource "exoscale_compute" "es_data" {
 }
 
 resource "exoscale_compute" "es_ingest" {
-  depends_on = ["exoscale_security_group.sg-elasticsearch"]
+  depends_on = [exoscale_security_group.sg-elasticsearch]
   count = "${var.ingest_count}"
-  template = "Linux CentOS 7.6 64-bit"
+  template = "Linux CentOS 7 64-bit"
   zone = "${var.zone}"
   size = "${var.ingest_size}"
   disk_size = "${var.ingest_disk}"

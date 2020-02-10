@@ -1,7 +1,7 @@
 resource "exoscale_compute" "gluster_node" {
-  depends_on = ["exoscale_security_group.sg-glusterfs"]
+  depends_on = [exoscale_security_group.sg-glusterfs]
   count = "${var.node_count}"
-  template = "Linux CentOS 7.6 64-bit"
+  template = "Linux CentOS 7 64-bit"
   zone = "${var.zone}"
   size = "${var.node_size}"
   disk_size = "${var.node_disk}"

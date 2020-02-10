@@ -1,7 +1,7 @@
 resource "exoscale_compute" "redis_master" {
-  depends_on = ["exoscale_security_group.sg-redis"]
+  depends_on = [exoscale_security_group.sg-redis]
   count = "${var.master_count}"
-  template =  "Linux CentOS 7.6 64-bit"
+  template =  "Linux CentOS 7 64-bit"
   zone = "${var.zone}"
   size = "${var.master_size}"
   disk_size = "${var.master_disk}"
@@ -31,9 +31,9 @@ resource "exoscale_compute" "redis_master" {
 }
 
 resource "exoscale_compute" "redis_replica" {
-  depends_on = ["exoscale_security_group.sg-redis"]
+  depends_on = [exoscale_security_group.sg-redis]
   count = "${var.replica_count}"
-  template =  "Linux CentOS 7.6 64-bit"
+  template =  "Linux CentOS 7 64-bit"
   zone = "${var.zone}"
   size = "${var.replica_size}"
   disk_size = "${var.replica_disk}"
@@ -63,9 +63,9 @@ resource "exoscale_compute" "redis_replica" {
 }
 
 resource "exoscale_compute" "redis_sentinel" {
-  depends_on = ["exoscale_security_group.sg-redis"]
+  depends_on = [exoscale_security_group.sg-redis]
   count = "${var.sentinel_count}"
-  template =  "Linux CentOS 7.6 64-bit"
+  template =  "Linux CentOS 7 64-bit"
   zone = "${var.zone}"
   size = "${var.sentinel_size}"
   disk_size = "${var.sentinel_disk}"
