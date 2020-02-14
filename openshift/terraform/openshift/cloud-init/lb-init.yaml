@@ -6,3 +6,5 @@ hostname: ${hostname}
 package_upgrade: true
 preserve_hostname: false
 fqdn: ${hostname}.${domain}
+runcmd:
+  - sed -i -e 's/NM_CONTROLLED=no/NM_CONTROLLED=yes\nPEERDNS=yes/g' /etc/sysconfig/network-scripts/ifcfg-eth0

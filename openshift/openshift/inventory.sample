@@ -41,3 +41,4 @@ osm_cluster_network_cidr=10.52.0.0/14
 openshift_portal_net=10.56.0.0/16
 
 openshift_metrics_install_metrics=true
+openshift_enable_service_catalog=false
