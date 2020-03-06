@@ -34,3 +34,4 @@ openshift_master_default_subdomain=#<dns_record_infra_nodes>
 openshift_master_cluster_hostname=#<loadbalancer_node_hostname>
 
 openshift_enable_service_catalog=false
+openshift_disable_check=docker_image_availability
