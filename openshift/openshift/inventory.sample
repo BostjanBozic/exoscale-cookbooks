@@ -42,3 +42,4 @@ openshift_portal_net=10.56.0.0/16
 
 openshift_metrics_install_metrics=true
 openshift_enable_service_catalog=false
+openshift_disable_check=docker_image_availability
