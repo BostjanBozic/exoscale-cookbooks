@@ -1,6 +1,6 @@
 # Kubernetes on Exoscale
 Scripts to provision Kubernetes cluster using [Terraform](https://www.terraform.io) and [Kubespray](https://github.com/kubernetes-sigs/kubespray) projects.
-* `kubespray` version: `v2.12.0` (Kubernetes version `v1.16.3`)
+* `kubespray` version: `v2.13.0` (Kubernetes version `v1.17.5`)
 * Underlying operating system: `Linux CoreOS 2135 64-bit`
 * project by default works only with 3 `etcd` nodes, if different ammount is required, update files in `terraform/kubernetes/cloud-init` accordingly
 
@@ -14,10 +14,10 @@ Scripts to provision Kubernetes cluster using [Terraform](https://www.terraform.
 * Install Terraform:
     * [Terraform](https://www.terraform.io/downloads.html)
 * Install following Python packages:
-    * `ansible` (v2.7.8 or newer, but not 2.8.x)
-    * `jinja2` (2.9 or newer)
+    * `ansible` (v2.9+)
+    * `jinja2` (2.11+)
     * `netaddr`
-    * `pbr` (higher then 1.6)
+    * `pbr`
     * `hvac`
     * `jmespath`
 * Register domain

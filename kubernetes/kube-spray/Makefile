@@ -2,7 +2,7 @@ bootstrap:
 	@echo -n "Do you want to install required Python dependencies? [y/n]: "; \
 	read answer_dependencies; \
 	if [ "$${answer_dependencies}" == "y" ]; then \
-		sudo pip install -r requirements.txt; \
+		sudo pip3 install -r requirements.txt; \
 	else \
 		echo "Skipping Python dependencies installation."; \
 	fi; \
@@ -19,7 +19,7 @@ scale:
 	@echo -n "Do you want to install required Python dependencies? [y/n]: "; \
 	read answer_dependencies; \
 	if [ "$${answer_dependencies}" == "y" ]; then \
-		sudo pip install -r requirements.txt; \
+		sudo pip3 install -r requirements.txt; \
 	else \
 		echo "Skipping Python dependencies installation."; \
 	fi; \

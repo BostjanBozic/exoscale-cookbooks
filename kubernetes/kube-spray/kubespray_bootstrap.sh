@@ -31,7 +31,7 @@ if [ ! -d "kubespray" ]; then
 fi
 
 cd kubespray
-git checkout release-2.12
+git checkout release-2.13
 git pull --quiet
 
 # Move Ansible inventory file to correct location
