@@ -1,7 +1,8 @@
 # Kubernetes on Exoscale
 Scripts to provision Kubernetes cluster using [Terraform](https://www.terraform.io) and [Kubespray](https://github.com/kubernetes-sigs/kubespray) projects.
-* `kubespray` version: `v2.13.0` (Kubernetes version `v1.17.5`)
-* Underlying operating system: `Linux CoreOS 2135 64-bit`
+* `kubespray` version: `v2.14.0` (Kubernetes version `v1.18.8`)
+* Kubernetes network overlay: `Weave v2.7.0`
+* Underlying operating system: `Linux CentOS 7 64-bit`
 * project by default works only with 3 `etcd` nodes, if different ammount is required, update files in `terraform/kubernetes/cloud-init` accordingly
 
 ## Workflow
@@ -89,7 +90,7 @@ Terraform has been successfully initialized!
 
 Next run `make create-infrastructure` and follow procedure.
 
-If all goes well, Terraform should report success message and your VMs are ready to install Kubernetes.
+If all goes well, Terraform should report success message and your VMs are ready to install Kubernetes. Keep in mind it takes a while for VMs to configure, so give it a 5-10 minutes before bootstraping Kubernetes cluster.
 
 ## Bootstrap Kubernetes Cluster
 Script uses [Kubespray](https://github.com/kubernetes-sigs/kubespray) for setting up Kubernetes cluster.

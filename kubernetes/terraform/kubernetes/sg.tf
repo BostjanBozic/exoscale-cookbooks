@@ -7,13 +7,13 @@ resource "exoscale_security_group_rules" "sg-k8s-rules" {
 
   ingress {
     protocol = "TCP"
-    ports = ["1-65535"]
+    ports = ["2379-2380", "6443", "10250-10252", "30000-32767", "6783"]
     user_security_group_list = ["sg-k8s"]
   }
 
   ingress {
     protocol = "UDP"
-    ports = ["1-65535"]
+    ports = ["8285", "8472", "6781-6784"]
     user_security_group_list = ["sg-k8s"]
   }
 

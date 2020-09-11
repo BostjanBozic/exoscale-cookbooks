@@ -3,7 +3,12 @@
 ---
 hostname: ${hostname}
 
-coreos:
-  update:
-    group: "stable"
-
+package_upgrade: true
+preserve_hostname: false
+fqdn: ${hostname}.${domain}
+runcmd:
+  - systemctl stop firewalld
+  - firewall-offline-cmd --add-service={http,https}
+  - firewall-offline-cmd --add-port={2379-2380,6443,10250-10252,6783}/tcp
+  - firewall-offline-cmd --add-port={8285,8472,6781-6784}/udp
+  - systemctl start firewalld

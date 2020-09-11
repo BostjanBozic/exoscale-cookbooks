@@ -31,7 +31,7 @@ if [ ! -d "kubespray" ]; then
 fi
 
 cd kubespray
-git checkout release-2.13
+git checkout release-2.14
 git pull --quiet
 
 # Move Ansible inventory file to correct location
@@ -41,4 +41,4 @@ cp ../inventory inventory/inventory
 rm -rf /tmp/k8s-*
 
 # Run Ansible playbook
-ansible-playbook -i inventory/inventory ${playbook_file} -b --become-user=root --private-key="${EXOKUBE_KEYFILE}" --extra-vars="@../exokube.yml"
+ansible-playbook -i inventory/inventory ${playbook_file} --become --become-user=root --private-key="${EXOKUBE_KEYFILE}" --extra-vars="@../exokube.yml"
