@@ -1,3 +1,6 @@
+# CentOS settings
+ansible_user: centos
+
 # Network overlay
 kube_network_plugin: weave
 kube_service_addresses: 172.18.0.0/18
